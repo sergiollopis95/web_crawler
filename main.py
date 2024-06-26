@@ -1,6 +1,8 @@
 # Import the Scraper and Filters classes from the crawler module.
 from crawler.scraper import Scraper
 from crawler.filters import Filters
+# Import Tabulate to create a table grid to print the results
+from tabulate import tabulate
 
 def main():
     # Initialize the scraper by creating an instance of the Scraper class.
@@ -28,10 +30,16 @@ def main():
         # If the user enters an invalid filter type, print an error message and exit.
         print("Invalid filter type.")
         return
+    
+    # Define the headers for the table
+    headers = ["Number", "Title", "Points", "Comments"]
 
     # Print out each of the filtered entries.
-    for entry in filtered_entries:
-        print(entry)
+    """ for entry in filtered_entries:
+        print(entry) """
+    
+     # Print out each of the filtered entries using library tabulate to turn it into a table grid    
+    print(tabulate(filtered_entries, headers=headers, tablefmt="grid"))
 
 # Check if this script is being run directly (as opposed to being imported).
 if __name__ == '__main__':
