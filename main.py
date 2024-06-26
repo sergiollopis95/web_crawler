@@ -1,24 +1,39 @@
-import requests
-from bs4 import BeautifulSoup
+# Import the Scraper and Filters classes from the crawler module.
+from crawler.scraper import Scraper
+from crawler.filters import Filters
 
-# URL to scrape
-url = 'http://example.com'
-
-# Send a GET request to the URL
-response = requests.get(url)
-
-# Check if the request was successful
-if response.status_code == 200:
-    # Parse the content of the page
-    soup = BeautifulSoup(response.content, 'html.parser')
+def main():
+    # Initialize the scraper by creating an instance of the Scraper class.
+    scraper = Scraper()
     
-    # Example: Extract the title of the page
-    title = soup.title.string
-    print(f'Title of the page: {title}')
+    # Use the scraper to scrape the website and store the entries in the database.
+    scraper.scrape_and_store()
     
-    # Example: Extract all links on the page
-    links = soup.find_all('a')
-    for link in links:
-        print(link.get('href'))
-else:
-    print(f'Failed to retrieve the page. Status code: {response.status_code}')
+    # Fetch all the stored entries from the database.
+    entries = scraper.db.fetch_all_entries()
+    
+    # Prompt the user to enter the type of filter they want to apply (comments or points).
+    filter_type = input("Enter filter type (comments/points): ").strip()
+    
+    # Check which filter type the user selected and apply the corresponding filter.
+    if filter_type == 'comments':
+        # Filter the entries by the number of comments and log this action.
+        filtered_entries = Filters.filter_by_comments(entries)
+        scraper.log_usage('filter_by_comments')
+    elif filter_type == 'points':
+        # Filter the entries by the number of points and log this action.
+        filtered_entries = Filters.filter_by_points(entries)
+        scraper.log_usage('filter_by_points')
+    else:
+        # If the user enters an invalid filter type, print an error message and exit.
+        print("Invalid filter type.")
+        return
+
+    # Print out each of the filtered entries.
+    for entry in filtered_entries:
+        print(entry)
+
+# Check if this script is being run directly (as opposed to being imported).
+if __name__ == '__main__':
+    # If so, call the main function to run the script.
+    main()
