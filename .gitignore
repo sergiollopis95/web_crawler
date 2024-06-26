@@ -120,6 +120,8 @@ celerybeat.pid
 
 # SageMath parsed files
 *.sage.py
+
+# DB generator
 crawler.db
 
 # Environments

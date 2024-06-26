@@ -23,6 +23,8 @@ class Scraper:
         items = soup.select('.athing')
         # Select all elements with class 'subtext', which contain metadata for the news items.
         subtexts = soup.select('.subtext')
+        # Initialize comments to 0
+        comments = 0
         
         # Iterate over the items up to the specified limit or the number of items, whichever is smaller.
         for i in range(min(limit, len(items))):
@@ -30,8 +32,10 @@ class Scraper:
             item = items[i]
             # Get the corresponding subtext (metadata) for the current news item.
             subtext = subtexts[i]
+            
             # Extract the rank of the news item and strip the trailing period.
             number = item.select_one('.rank').text.strip('.')
+            
             # Extract the title of the news item from the element with the class "titleline".
             title = item.select_one('.titleline').text
 
@@ -43,43 +47,36 @@ class Scraper:
             # - \) : a literal closing parenthesis.
             # re.sub replaces the matched pattern with an empty string, effectively removing it.
             clean_title = re.sub(r'\s*\([^)]*\)', '', title)
-
             # Extract the points (score) for the news item if available, otherwise set to 0.
             points = int(re.search(r'(\d+)\spoints', subtext.text).group(1)) if subtext.select_one('.score') else 0
 
-            
-            
-            
-            # testing
-            # Select the span element with class "score"
-            
-            score_span = soup.find('span', class_='score')
-            element_id = score_span.get('id')
-            #print(element_id)  # Output: score_40749345
+       
+            # Find all anchor elements within the 'subtext' element that contain a text pattern matching 'digits followed by a space and the word "comments"'
+            comments_link = subtext.find_all('a', string=re.compile(r'\d+\scomments'))
 
-            # Extract the number part of the ID using regex
-            id_match = re.search(r'\d+', element_id)
-            if id_match:
-                number_part = id_match.group(0)
-                result = 'unv_' + number_part
-                #print(result)  # Output: .unv_40749345
+            # Check if any such anchor elements were found
+            if comments_link:
+                # Extract the text content from the first matching anchor element
+                comments_text = comments_link[0].text
+                print("Comments text:", comments_text)
+                
+                # Use a regular expression to search for the number of comments within the extracted text
+                # Replace any non-breaking spaces (encoded as '\xa0') with regular spaces to ensure correct matching
+                # <a href="item?id=40773671">5&nbsp;comments</a>
+                comments_match = re.search(r'(\d+)\scomments', comments_text.replace('\xa0', ' '))
+                
+                # Check if the regular expression found a match
+                if comments_match:
+                    # Convert the matched number (group 1) from a string to an integer and assign it to the 'comments' variable
+                    comments = int(comments_match.group(1))
+                    #print("Number of comments:", comments)
+                else:
+                    # If the regular expression did not find a match, print an error message
+                    print("Comments not found in the link text.")
             else:
-                result = None
-                print("No ID number found")
-
-            # Example subtext HTML content for extracting comments
-            """  subtext_html = '''
-            <a href="item?id=40749345">12 comments</a>
-            '''
-            subtext = BeautifulSoup(subtext_html, 'html.parser')
-             """
-             
-             #<a href="item?id=40804856">7&nbsp;comments</a>
-             
-            # Extract the number of comments for the news item if available, otherwise set to 0
-            comments = int(re.search(r'(\d+)\scomments', subtext.text).group(1)) if subtext.select_one('a[href*="' + number_part + '"]') else 0
-            #print(comments)  # Output: 12
-
+                # If no anchor elements with the matching pattern were found, print an error message
+                print("Comments link not found.")
+                    
             # Append the extracted information as a tuple to the entries list.
             entries.append((number, clean_title, points, comments))
         

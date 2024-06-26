@@ -14,6 +14,7 @@ Web crawler using Python, utilizing the `requests` and `BeautifulSoup` libraries
 ## Design Decisions
 
 - **Python**: Chosen for its simplicity and powerful libraries for web scraping and database operations.
+- **Libraries**: `BeautifulSoup` for parsing HTML content, `requests` for handling HTTP requests, and `tabulate` for creating table grids to properly display data.
 - **SQLite**: Used for lightweight, file-based storage.
 - **Object-Oriented Design**: For modular and maintainable code.
 - **Logging**: Usage logs stored in the same SQLite database.
