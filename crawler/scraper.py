@@ -1,14 +1,15 @@
-import requests
-from bs4 import BeautifulSoup
-import re
-from storage import Database
+import requests  # Import the requests library to handle HTTP requests
+from bs4 import BeautifulSoup  # Import BeautifulSoup from bs4 to parse HTML content
+import re  # Import the regular expressions library for string matching
+from .storage import Database  # Import the custom Database class from the storage module
+from datetime import datetime  # Import datetime for handling date and time
 
 class Scraper:
-    # Base URL for the Hacker News website
+    # Define the base URL for the Hacker News website
     BASE_URL = "https://news.ycombinator.com/"
 
     def __init__(self, db_path='crawler.db'):
-        # Initialize the Database class with the provided database path
+        # Initialize the Database instance with the provided database path
         self.db = Database(db_path)
     
     def fetch_entries(self, limit=30):
@@ -43,15 +44,27 @@ class Scraper:
         # Return the list of entries
         return entries
 
+    def store_entries(self, entries): 
+        # Iterate over each entry in the list of entries
+        for entry in entries:
+            # Insert the entry into the database
+            self.db.insert_entry(entry)
 
-    '''
-    TODO: 
+    def log_usage(self, filter_type):
+        # Get the current timestamp in ISO format
+        timestamp = datetime.now().isoformat()
+        # Log the usage information with the timestamp and filter type in the database
+        self.db.log_usage(timestamp, filter_type)
 
-
-    def store_entries(self, entries): Stores the list of entries in the DB.
-    def log_usage(self, filter_type): Logs the usage - timestamp & filter type used
-    def scrape_and_store(self): performs store_entries() and log_usage() methods
+    def scrape_and_store(self):
+        # Fetch the entries from the website
+        entries = self.fetch_entries()
+        # Store the fetched entries in the database
+        self.store_entries(entries)
+        # Log the usage of the scrape operation
+        self.log_usage('scrape')
     
     
-    '''
-   
+
+        
+        

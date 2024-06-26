@@ -15,19 +15,19 @@ class Database:
             # Execute a SQL command to create the 'entries' table if it doesn't exist
             self.conn.execute('''
                 CREATE TABLE IF NOT EXISTS entries (
-                    id INTEGER PRIMARY KEY,    # Primary key for the table
-                    number TEXT,               # Rank number of the news item
-                    title TEXT,                # Title of the news item
-                    points INTEGER,            # Points (score) of the news item
-                    comments INTEGER           # Number of comments on the news item
+                    id INTEGER PRIMARY KEY,    -- Unique identifier for each entry, serves as the primary key
+                    number TEXT,               -- Rank number of the news item as a string
+                    title TEXT,                -- Title of the news item
+                    points INTEGER,            -- Points (score) of the news item
+                    comments INTEGER           -- Number of comments on the news item
                 )
             ''')
             # Execute a SQL command to create the 'usage' table if it doesn't exist
             self.conn.execute('''
                 CREATE TABLE IF NOT EXISTS usage (
-                    id INTEGER PRIMARY KEY,    # Primary k ey for the table
-                    timestamp TEXT,            # Timestamp of the logged event
-                    filter_type TEXT           # Type of filter used during the event
+                    id INTEGER PRIMARY KEY,    -- Primary k ey for the table
+                    timestamp TEXT,            -- Timestamp of the logged event
+                    filter_type TEXT           -- Type of filter used during the event
                 )
             ''')
             
