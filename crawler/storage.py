@@ -25,10 +25,37 @@ class Database:
             # Execute a SQL command to create the 'usage' table if it doesn't exist
             self.conn.execute('''
                 CREATE TABLE IF NOT EXISTS usage (
-                    id INTEGER PRIMARY KEY,    # Primary key for the table
+                    id INTEGER PRIMARY KEY,    # Primary k ey for the table
                     timestamp TEXT,            # Timestamp of the logged event
                     filter_type TEXT           # Type of filter used during the event
                 )
             ''')
-
+            
+    # Method to insert a new entry into the 'entries' table
+    def insert_entry(self, entry):
+        # Use a context manager to handle the database connection
+        with self.conn:
+            # Execute a SQL command to insert the provided entry data into the 'entries' table
+            self.conn.execute('''
+                INSERT INTO entries (number, title, points, comments) 
+                VALUES (?, ?, ?, ?)
+            ''', entry)  # The entry parameter is a tuple containing the values to be inserted
         
+    # Method to log the usage event into the 'usage' table
+    def log_usage(self, timestamp, filter_type):
+        # Use a context manager to handle the database connection
+        with self.conn:
+            # Execute a SQL command to insert the timestamp and filter type into the 'usage' table
+            self.conn.execute('''
+                INSERT INTO usage (timestamp, filter_type) 
+                VALUES (?, ?)
+            ''', (timestamp, filter_type))  # The parameters are the timestamp and filter type of the usage event
+        
+    # Method to fetch all entries from the 'entries' table
+    def fetch_all_entries(self):
+        # Create a cursor object to interact with the database
+        cursor = self.conn.cursor()
+        # Execute a SQL command to select all relevant columns from the 'entries' table
+        cursor.execute('SELECT number, title, points, comments FROM entries')
+        # Fetch all the results and return them as a list of tuples
+        return cursor.fetchall()
