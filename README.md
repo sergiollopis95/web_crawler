@@ -9,16 +9,16 @@ Web crawler using Python, utilizing the `requests` and `BeautifulSoup` libraries
 ### Business Logic
 - [ ] Filter all previous entries with more than five words in the title ordered by the number of comments first.
 - [ ] Filter all previous entries with less than or equal to five words in the title ordered by points.
-- [ ] Store usage data in SQLite, including at least the request timestamp and a field to identify the applied filter type.
+- [x] Store usage data in SQLite, including at least the request timestamp and a field to identify the applied filter type.
 - [ ] Brief documentation explaining the key design decisions I made.
-- [ ] Well-explained comments on my code.
+- [x] Commenting my code throughout.
 
 ### Bonus Points
 
 - [x] Good object-oriented/functional code, avoiding repetition and favoring a consistent organization. Stick to the semantics of chosen language and be as consistent as possible.
-- [ ] Correct usage of version control tools, with a good commit history and incremental software delivery practices.
+- [x] Correct usage of version control tools, with a good commit history and incremental software delivery practices.
 - [ ] Automated testing with any framework or tool of your choice.
-- [ ] Clean, well-structured code and who can creatively solve problems.
+- [x] Clean, well-structured code and who can creatively solve problems.
 - [x] README file to guide through my work.
 - [x] Submit the result to GitHub.
 
