@@ -1,5 +1,7 @@
 # web_crawler
-Web crawler using Python, utilizing the `requests` and `BeautifulSoup` libraries for web scraping, SQLite for data storage, filtering functionality and usage data logging.
+Web crawler using Python, utilizing the `requests` and `BeautifulSoup` libraries for web scraping, SQLite for data storage, filtering functionality, and usage data logging.
+
+> **Note**: Ensure you have Python installed on your system before starting with this project.
 
 # Project Overview
 
@@ -11,6 +13,8 @@ Web crawler using Python, utilizing the `requests` and `BeautifulSoup` libraries
 - `requirements.txt`: Lists the Python dependencies.
 - `README.md`: Project documentation.
 
+> **Alert**: Make sure to review the directory structure to understand where each component resides before making changes.
+
 ## Design Decisions
 
 - **Python**: Chosen for its simplicity and powerful libraries for web scraping and database operations.
@@ -18,6 +22,8 @@ Web crawler using Python, utilizing the `requests` and `BeautifulSoup` libraries
 - **SQLite**: Used for lightweight, file-based storage.
 - **Object-Oriented Design**: For modular and maintainable code.
 - **Logging**: Usage logs stored in the same SQLite database.
+
+> **Note**: The use of these libraries and design decisions ensures the application is easy to maintain and extend.
 
 # Project Setup
 
@@ -33,10 +39,10 @@ Web crawler using Python, utilizing the `requests` and `BeautifulSoup` libraries
 
 ### Bonus Points
 
-- [x] Good object-oriented/functional code, avoiding repetition and favoring a consistent organization. Stick to the semantics of chosen language and be as consistent as possible.
+- [x] Good object-oriented/functional code, avoiding repetition and favoring a consistent organization. Stick to the semantics of the chosen language and be as consistent as possible.
 - [x] Correct usage of version control tools, with a good commit history and incremental software delivery practices.
-- [ ] Automated testing with any framework or tool of your choice.
-- [x] Clean, well-structured code and who can creatively solve problems.
+- [x] Automated testing with any framework or tool of your choice.
+- [x] Clean, well-structured code.
 - [x] README file to guide through my work.
 - [x] Submit the result to GitHub.
 
@@ -51,7 +57,7 @@ WEB_CRAWLER/
 │   └── storage.py
 ├── tests
 │   ├── __init__.py
-│   ├── test_scraper
+│   ├── test_scraper.py
 │   ├── test_filters.py
 │   └── test_storage.py
 ├── main.py
@@ -60,3 +66,20 @@ WEB_CRAWLER/
 ├── README.md
 └── .gitignore
 
+### Additional Tips
+
+- **Environment Setup**: Use virtual environments to manage dependencies.
+  ```bash
+  python -m venv venv
+  source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+  pip install -r requirements.txt
+
+- **Running the Scraper**: To run the scraper and apply filters:
+
+```bash
+python main.py
+
+- **Testing**: Run the tests to ensure everything is working as expected:
+
+```bash
+python -m unittest discover tests

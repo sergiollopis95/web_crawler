@@ -59,9 +59,8 @@ class Scraper:
     scrape_and_store():
         Orchestrates the scraping, storing, and logging operations.
     """
-    
     BASE_URL = "https://news.ycombinator.com/"
-
+    
     def __init__(self, db_path='crawler.db'):
         """
         Initializes the Scraper with a database connection.
@@ -71,8 +70,8 @@ class Scraper:
         db_path : str, optional
             The path to the database file (default is 'crawler.db').
         """
-        self.db = Database(db_path)
-    
+        self.db = Database(db_path)    
+        
     def fetch_entries(self, limit=30):
         """
         Fetches and parses entries from Hacker News.
