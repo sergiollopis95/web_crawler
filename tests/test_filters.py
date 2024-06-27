@@ -45,7 +45,8 @@ class TestFilters(unittest.TestCase):
             ('1', 'Short title', 50, 10),
             ('2', 'This is a longer title with more words', 100, 20),
             ('3', 'Another long title example', 150, 5),
-            ('4', 'Tiny', 20, 2)
+            ('4', 'Tiny', 20, 2),
+            ('5', 'Just right', 70, 15)
         ]
 
     def test_filter_by_comments(self):
@@ -68,8 +69,8 @@ class TestFilters(unittest.TestCase):
         """
         filtered_entries = Filters.filter_by_points(self.entries)
         self.assertGreater(len(filtered_entries), 0, "Should filter out entries with 5 or fewer words in the title")
-        self.assertEqual(filtered_entries[0][1], 'Short title', "Should return entry with highest points first")
+        self.assertEqual(filtered_entries[0][1], 'Another long title example', "Titles should match expected order")
+        self.assertEqual(filtered_entries[0][2], 150, "Points should match expected order")
 
 if __name__ == '__main__':
-    unittest.main()
-    # Run the unit tests if this script is executed directly
+    unittest.main()  # Run the unit tests if this script is executed directly

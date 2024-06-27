@@ -53,8 +53,8 @@ class Filters:
             A list of filtered and sorted entries by the number of comments.
         """
         return sorted(
-            [entry for entry in entries if len(entry[1].split()) > 5], 
-            key=lambda x: x[3], 
+            [entry for entry in entries if len(entry[1].split()) > 5],
+            key=lambda x: x[3],
             reverse=True
         )
     
@@ -78,7 +78,7 @@ class Filters:
             A list of filtered and sorted entries by the number of points.
         """
         return sorted(
-            [entry for entry in entries if len(entry[1].split()) <= 5], 
-            key=lambda x: x[2], 
+            [entry for entry in entries if len(entry[1].split()) <= 5],
+            key=lambda x: x[2],
             reverse=True
         )

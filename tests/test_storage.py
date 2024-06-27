@@ -57,8 +57,9 @@ class TestDatabase(unittest.TestCase):
         """
         Cleans up any necessary objects or state after each test.
 
-        Removes the test database file if it exists.
+        Closes the database connection and removes the test database file if it exists.
         """
+        self.db.conn.close()
         if os.path.exists(self.db_path):
             os.remove(self.db_path)
 
