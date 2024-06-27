@@ -49,10 +49,11 @@ Web crawler using Python, utilizing the `requests` and `BeautifulSoup` libraries
 ### Additional Tips
 
 - **Environment Setup**: Use virtual environments to manage dependencies.
-  ```bash
+```bash
   python -m venv venv
   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
   pip install -r requirements.txt
+```
 
 - **Running the Scraper**: To run the scraper and apply filters:
 
@@ -85,21 +86,3 @@ WEB_CRAWLER/
 ├── LICENSE
 ├── README.md
 └── .gitignore
-
-### Additional Tips
-
-- **Environment Setup**: Use virtual environments to manage dependencies.
-  ```bash
-  python -m venv venv
-  source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-  pip install -r requirements.txt
-
-- **Running the Scraper**: To run the scraper and apply filters:
-
-```bash
-python main.py
-
-- **Testing**: Run the tests to ensure everything is working as expected:
-
-```bash
-python -m unittest discover tests

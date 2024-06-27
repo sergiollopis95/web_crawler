@@ -109,10 +109,6 @@ class Scraper:
                 comments_match = re.search(r'(\d+)\scomments', comments_text.replace('\xa0', ' '))
                 if comments_match:
                     comments = int(comments_match.group(1))
-                else:
-                    print("Comments not found in the link text.")
-            else:
-                print("Comments link not found.")
                     
             entries.append((number, clean_title, points, comments))
         
