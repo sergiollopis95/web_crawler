@@ -1,7 +1,7 @@
 # web_crawler
-Web crawler using Python, utilizing the `requests` and `BeautifulSoup` libraries for web scraping, SQLite for data storage, filtering functionality, and usage data logging.
+Web crawler using Python, utilizing the `requests` and `BeautifulSoup` libraries for web scraping, `tabulate` for creating table grids, `SQLite` for data storage, filtering functionality, and usage data logging.
 
-> **Note**: Ensure you have Python installed on your system before starting with this project.
+> **Note**: Ensure you have [Python](https://www.python.org/downloads/) installed on your system before starting with this project.
 
 # Project Overview
 
@@ -46,6 +46,26 @@ Web crawler using Python, utilizing the `requests` and `BeautifulSoup` libraries
 - [x] README file to guide through my work.
 - [x] Submit the result to GitHub.
 
+### Additional Tips
+
+- **Environment Setup**: Use virtual environments to manage dependencies.
+  ```bash
+  python -m venv venv
+  source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+  pip install -r requirements.txt
+
+- **Running the Scraper**: To run the scraper and apply filters:
+
+```bash
+python main.py
+```
+
+- **Testing**: Run the tests to ensure everything is working as expected:
+
+```bash
+python -m unittest discover tests
+```
+
 ## Project Structure
 
 ```plaintext
@@ -65,21 +85,4 @@ WEB_CRAWLER/
 ├── LICENSE
 ├── README.md
 └── .gitignore
-
-### Additional Tips
-
-- **Environment Setup**: Use virtual environments to manage dependencies.
-  ```bash
-  python -m venv venv
-  source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-  pip install -r requirements.txt
-
-- **Running the Scraper**: To run the scraper and apply filters:
-
-```bash
-python main.py
-
-- **Testing**: Run the tests to ensure everything is working as expected:
-
-```bash
-python -m unittest discover tests
+```
